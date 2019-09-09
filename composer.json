@@ -1,0 +1,28 @@
+{
+  "name": "deenison/docker-php-project-boilerplate",
+  "version": "0.1.0",
+  "scripts": {
+    "test": "./vendor/bin/phpunit test"
+  },
+  "config": {
+    "platform": {
+      "php": "7.3"
+    }
+  },
+  "require": {
+    "php": "~7.3"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^7.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "Boilerplate\\": "./src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Test\\Boilerplate\\": "./test/src"
+    }
+  }
+}
