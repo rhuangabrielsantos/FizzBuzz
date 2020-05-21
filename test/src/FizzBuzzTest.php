@@ -3,7 +3,7 @@
 namespace Test\Boilerplate;
 
 use Boilerplate\FizzBuzz;
-use Boilerplate\Welcomer;
+use OutOfRangeException;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 
@@ -79,7 +79,7 @@ class FizzBuzzTest extends TestCase
     {
         $number = 0;
 
-        $this->expectException(\OutOfRangeException::class);
+        $this->expectException(OutOfRangeException::class);
         $this->expectExceptionMessage('You must pass positive numbers only');
 
         FizzBuzz::calculateFizzBuzzFromInt($number);
@@ -89,7 +89,7 @@ class FizzBuzzTest extends TestCase
     {
         $number = -15;
 
-        $this->expectException(\OutOfRangeException::class);
+        $this->expectException(OutOfRangeException::class);
         $this->expectExceptionMessage('You must pass positive numbers only');
 
         FizzBuzz::calculateFizzBuzzFromInt($number);

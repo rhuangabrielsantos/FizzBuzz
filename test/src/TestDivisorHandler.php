@@ -6,11 +6,8 @@ use Boilerplate\DivisorHandler;
 
 class TestDivisorHandler implements DivisorHandler
 {
-    /** @var bool */
-    private $canHandleNumber;
-
-    /** @var string */
-    private $output;
+    private bool $canHandleNumber;
+    private string $output;
 
     public function __construct(bool $canHandleNumber, string $output)
     {

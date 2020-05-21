@@ -7,8 +7,7 @@ class FifteenDivisor implements DivisorHandler
     private const DIVISOR_OUTPUT = 'FizzBuzz';
     private const DIVISOR = 15;
 
-    /** @var DivisorHandler|null */
-    private $nextDivisor;
+    private ?DivisorHandler $nextDivisor;
 
     public function __construct(?DivisorHandler $nextDivisor)
     {

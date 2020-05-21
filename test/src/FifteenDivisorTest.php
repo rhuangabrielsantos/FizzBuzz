@@ -24,7 +24,7 @@ class FifteenDivisorTest extends TestCase
 
     public function testFifteenDivisorGivenMultipleOfFifteenAndNextDivisorShouldReturnFizzBuzz(): void
     {
-        $nextDivisor = new TestDivisorHandler($canHandleNumber = true, $output = 'ai papai');
+        $nextDivisor = new TestDivisorHandler($canHandleNumber = true, $output = 'hey baby');
 
         $divisor = new FifteenDivisor($nextDivisor);
 
@@ -34,11 +34,11 @@ class FifteenDivisorTest extends TestCase
 
     public function testFifteenDivisorGivenNotMultipleOfFifteenAndNextDivisorShouldReturnNextDivisorExpectedNumber(): void
     {
-        $nextDivisor = new TestDivisorHandler($canHandleNumber = true, $output = 'ai papai');
+        $nextDivisor = new TestDivisorHandler($canHandleNumber = true, $output = 'hey baby');
 
         $divisor = new FifteenDivisor($nextDivisor);
 
         $output = $divisor->handleInteger($number = 9);
-        Assert::assertEquals('ai papai', $output);
+        Assert::assertEquals('hey baby', $output);
     }
 }

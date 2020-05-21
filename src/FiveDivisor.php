@@ -2,10 +2,10 @@
 
 namespace Boilerplate;
 
-class ThreeDivisor implements DivisorHandler
+class FiveDivisor implements DivisorHandler
 {
-    private const DIVISOR_OUTPUT = 'Fizz';
-    private const DIVISOR = 3;
+    private const DIVISOR_OUTPUT = 'Buzz';
+    private const DIVISOR = 5;
 
     private ?DivisorHandler $nextDivisor;
 
