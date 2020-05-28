@@ -8,19 +8,13 @@ use OutOfRangeException;
 
 class FizzBuzz
 {
-    public static function calculateFizzBuzzFromInt(int $number): string
+    public static function calculateFizzBuzzFromInt(int $number, DivisorHandler $divisorHandler): string
     {
         if (self::isNumberNegativeOrZero($number)) {
             throw new OutOfRangeException('You must pass positive numbers only');
         }
 
-        return
-            (new FifteenDivisor(
-                (new FiveDivisor(
-                    (new ThreeDivisor(null))
-                ))
-            ))->handleInteger($number);
-
+        return $divisorHandler->handleInteger($number);
     }
 
     private static function isNumberNegativeOrZero(int $number): bool

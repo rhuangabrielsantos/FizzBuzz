@@ -2,7 +2,10 @@
 
 namespace Test\Boilerplate;
 
+use Boilerplate\FifteenDivisor;
+use Boilerplate\FiveDivisor;
 use Boilerplate\FizzBuzz;
+use Boilerplate\ThreeDivisor;
 use OutOfRangeException;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
@@ -17,10 +20,15 @@ class FizzBuzzTest extends TestCase
         ];
     }
 
-    /** @dataProvider provideSomeMultiplesOfFifteen */
+    /**
+     * @dataProvider provideSomeMultiplesOfFifteen
+     * @param int $multipleOfFifteen
+     */
     public function testFizzBuzzGivenMultiplesOfFifteenShouldReturnFizzBuzz(int $multipleOfFifteen): void
     {
-        $fizzBuzzResult = FizzBuzz::calculateFizzBuzzFromInt($multipleOfFifteen);
+        $divisorHandler = (new FifteenDivisor(null));
+
+        $fizzBuzzResult = FizzBuzz::calculateFizzBuzzFromInt($multipleOfFifteen, $divisorHandler);
 
         Assert::assertEquals('FizzBuzz', $fizzBuzzResult);
     }
@@ -32,10 +40,15 @@ class FizzBuzzTest extends TestCase
         ];
     }
 
-    /** @dataProvider provideSomeMultiplesOfFive */
+    /**
+     * @dataProvider provideSomeMultiplesOfFive
+     * @param int $multipleOfFive
+     */
     public function testFizzBuzzGivenMultiplesOfFiveShouldReturnBuzz(int $multipleOfFive): void
     {
-        $fizzBuzzResult = FizzBuzz::calculateFizzBuzzFromInt($multipleOfFive);
+        $divisorHandler = (new FiveDivisor(null));
+
+        $fizzBuzzResult = FizzBuzz::calculateFizzBuzzFromInt($multipleOfFive, $divisorHandler);
 
         Assert::assertEquals('Buzz', $fizzBuzzResult);
     }
@@ -48,10 +61,15 @@ class FizzBuzzTest extends TestCase
         ];
     }
 
-    /** @dataProvider provideSomeMultiplesOfThree */
+    /**
+     * @dataProvider provideSomeMultiplesOfThree
+     * @param int $multiplesOfThree
+     */
     public function testFizzBuzzGivenMultiplesOfThreeShouldReturnFizz(int $multiplesOfThree): void
     {
-        $fizzBuzzResult = FizzBuzz::calculateFizzBuzzFromInt($multiplesOfThree);
+        $divisorHandler = (new ThreeDivisor(null));
+
+        $fizzBuzzResult = FizzBuzz::calculateFizzBuzzFromInt($multiplesOfThree, $divisorHandler);
 
         Assert::assertEquals('Fizz', $fizzBuzzResult);
     }
@@ -67,10 +85,20 @@ class FizzBuzzTest extends TestCase
         ];
     }
 
-    /** @dataProvider provideSomeNumbersNotDivisibleByDivisors */
+    /**
+     * @dataProvider provideSomeNumbersNotDivisibleByDivisors
+     * @param int $number
+     */
     public function testFizzBuzzGivenNumberNotDivisibleByAnyOfTheDivisorsShouldReturnNumber(int $number): void
     {
-        $fizzBuzzResult = FizzBuzz::calculateFizzBuzzFromInt($number);
+        $divisorHandler =
+            (new FifteenDivisor(
+                (new FiveDivisor(
+                    (new ThreeDivisor(null))
+                ))
+            ));
+
+        $fizzBuzzResult = FizzBuzz::calculateFizzBuzzFromInt($number, $divisorHandler);
 
         Assert::assertEquals($number, $fizzBuzzResult);
     }
@@ -78,21 +106,33 @@ class FizzBuzzTest extends TestCase
     public function testFizzBuzzGivenZeroShouldThrowException(): void
     {
         $number = 0;
+        $divisorHandler =
+            (new FifteenDivisor(
+                (new FiveDivisor(
+                    (new ThreeDivisor(null))
+                ))
+            ));
 
         $this->expectException(OutOfRangeException::class);
         $this->expectExceptionMessage('You must pass positive numbers only');
 
-        FizzBuzz::calculateFizzBuzzFromInt($number);
+        FizzBuzz::calculateFizzBuzzFromInt($number, $divisorHandler);
     }
 
     public function testFizzBuzzGivenNegativeNumberShouldThrowException(): void
     {
         $number = -15;
+        $divisorHandler =
+            (new FifteenDivisor(
+                (new FiveDivisor(
+                    (new ThreeDivisor(null))
+                ))
+            ));
 
         $this->expectException(OutOfRangeException::class);
         $this->expectExceptionMessage('You must pass positive numbers only');
 
-        FizzBuzz::calculateFizzBuzzFromInt($number);
+        FizzBuzz::calculateFizzBuzzFromInt($number, $divisorHandler);
     }
 
     public static function provideIntegersFromOneToSixteen(): array {
@@ -117,10 +157,21 @@ class FizzBuzzTest extends TestCase
         ];
     }
 
-    /** @dataProvider provideIntegersFromOneToSixteen */
+    /**
+     * @dataProvider provideIntegersFromOneToSixteen
+     * @param int $number
+     * @param string $expected_output
+     */
     public function testFizzBuzzGivenNumbersFrom1To16ShouldReturnExpectedString(int $number, string $expected_output): void
     {
-        $fizzBuzzOutput = FizzBuzz::calculateFizzBuzzFromInt($number);
+        $divisorHandler =
+            (new FifteenDivisor(
+                (new FiveDivisor(
+                    (new ThreeDivisor(null))
+                ))
+            ));
+
+        $fizzBuzzOutput = FizzBuzz::calculateFizzBuzzFromInt($number, $divisorHandler);
         Assert::assertEquals($expected_output, $fizzBuzzOutput);
     }
 }
